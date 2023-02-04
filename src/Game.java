@@ -4,6 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Game {
+    Barbarian barb = new Barbarian();
+    //Bard bard = new Bard();
+    //Knight knight = new Knight();
+    //Mage mage = new Mage();
+    //Paladin pal = new Paladin();
+    //Rogue rogue = new Rogue();
+
     Color c = new Color(247, 223, 175);
     Color b = new Color(249, 231, 195);
     JFrame window;
@@ -12,11 +19,13 @@ public class Game {
     JLabel titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
     Font titleFont = new Font("Papyrus", Font.PLAIN, 90);
     Font normalFont = new Font("Papyrus", Font.PLAIN, 30);
-    JButton startButton, mageButton, knightButton, rogueButton, bardButton, barbarianButton, paladinButton;
+    JButton startButton, mageButton, knightButton, rogueButton, bardButton, barbarianButton, paladinButton,
+    choice1, choice2, choice3;
     JTextArea maintextArea;
     int playerHP;
     String weapon, position;
     TitleScreenHandler tsHandler = new TitleScreenHandler();
+    ChoiceHandler ch = new ChoiceHandler();
 
     public static void main(String[] args) {
         new Game();
@@ -67,10 +76,9 @@ public class Game {
         con.add(mainTextPanel);
 
         //need to find a better way to do wrapping, may end up hurting
-        //me in future if i dont solve issue
+        //me in future if i don't solve issue
         // also doing \n works just fine in mainTextArea
-        maintextArea = new JTextArea("Greetings, Traveler. It is time to start your adventure"+
-                ". Which class would you like to pursue?");
+        maintextArea = new JTextArea("xxx?");
         maintextArea.setBounds(100, 100, 600, 250);
         maintextArea.setBackground(Color.black);
         maintextArea.setForeground(Color.white);
@@ -91,13 +99,9 @@ public class Game {
         mageButton = choiceButton("Mage");
         paladinButton = choiceButton("Paladin");
         rogueButton = choiceButton("Rogue");
-
-        choiceButtonPanel.add(barbarianButton);
-        choiceButtonPanel.add(bardButton);
-        choiceButtonPanel.add(knightButton);
-        choiceButtonPanel.add(mageButton);
-        choiceButtonPanel.add(paladinButton);
-        choiceButtonPanel.add(rogueButton);
+        choice1 = choiceButton("");
+        choice2 = choiceButton("");
+        choice3 = choiceButton("");
 
         playerPanel = new JPanel();
         playerPanel.setBounds(100, 15, 600, 50);
@@ -134,12 +138,27 @@ public class Game {
         weapon = "knife";
         hpLabelNumber.setText(""+playerHP);
         weaponLabelName.setText(weapon);
+        routeSelection();
     }
 
     public class TitleScreenHandler implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             createGameScreen();
+        }
+    }
+
+    public class ChoiceHandler implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String yourChoice = e.getActionCommand();
+            switch (position){
+                case "start":
+                    switch(yourChoice){
+                        case "barbarian":
+                            //barb.start();
+                    }
+            }
         }
     }
 
@@ -152,12 +171,36 @@ public class Game {
         button.setFont(normalFont);
         button.setText(text);
         button.setFocusPainted(false);
+        button.addActionListener(ch);
         return button;
 
     }
 
     public void routeSelection(){
         position = "start";
-
+        maintextArea.setText("Greetings, Traveler. It is time to start your adventure"+
+                ". Which class would you like to pursue?");
+        choiceButtonPanel.add(barbarianButton);
+        barbarianButton.setActionCommand("barbarian");
+        choiceButtonPanel.add(bardButton);
+        barbarianButton.setActionCommand("bard");
+        choiceButtonPanel.add(knightButton);
+        barbarianButton.setActionCommand("knight");
+        choiceButtonPanel.add(mageButton);
+        barbarianButton.setActionCommand("mage");
+        choiceButtonPanel.add(paladinButton);
+        barbarianButton.setActionCommand("paladin");
+        choiceButtonPanel.add(rogueButton);
+        barbarianButton.setActionCommand("rogue");
     }
+}
+
+class Barbarian extends Game{
+    public void start(){
+        choiceButtonPanel.setLayout(new GridLayout(1, 2));
+        choice1.setText("Choice 1");
+        choice2.setText("Choice 1");
+        maintextArea.setText("Welcome to the Barbarian class!");
+    }
+
 }
