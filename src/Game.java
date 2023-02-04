@@ -8,12 +8,14 @@ public class Game {
     Color b = new Color(249, 231, 195);
     JFrame window;
     Container con;
-    JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel;
-    JLabel titleNameLabel;
+    JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel;
+    JLabel titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
     Font titleFont = new Font("Papyrus", Font.PLAIN, 90);
     Font normalFont = new Font("Papyrus", Font.PLAIN, 30);
     JButton startButton, mageButton, knightButton, rogueButton, bardButton, barbarianButton, paladinButton;
     JTextArea maintextArea;
+    int playerHP;
+    String weapon, position;
     TitleScreenHandler tsHandler = new TitleScreenHandler();
 
     public static void main(String[] args) {
@@ -44,6 +46,7 @@ public class Game {
         startButton.setForeground(Color.gray);
         startButton.setFont(normalFont);
         startButton.addActionListener(tsHandler);
+        startButton.setFocusPainted(false);
 
         titleNamePanel.add(titleNameLabel);
         startButtonPanel.add(startButton);
@@ -65,6 +68,7 @@ public class Game {
 
         //need to find a better way to do wrapping, may end up hurting
         //me in future if i dont solve issue
+        // also doing \n works just fine in mainTextArea
         maintextArea = new JTextArea("Greetings, Traveler. It is time to start your adventure"+
                 ". Which class would you like to pursue?");
         maintextArea.setBounds(100, 100, 600, 250);
@@ -95,6 +99,41 @@ public class Game {
         choiceButtonPanel.add(paladinButton);
         choiceButtonPanel.add(rogueButton);
 
+        playerPanel = new JPanel();
+        playerPanel.setBounds(100, 15, 600, 50);
+        playerPanel.setBackground(b);
+        playerPanel.setLayout(new GridLayout(1, 4));
+        con.add(playerPanel);
+
+        hpLabel = new JLabel("HP: ");
+        hpLabel.setFont(normalFont);
+        hpLabel.setForeground(Color.darkGray);
+        playerPanel.add(hpLabel);
+
+        hpLabelNumber = new JLabel();
+        hpLabelNumber.setFont(normalFont);
+        hpLabelNumber.setForeground(Color.darkGray);
+        playerPanel.add(hpLabelNumber);
+
+        weaponLabel = new JLabel("Weapon: ");
+        weaponLabel.setFont(normalFont);
+        weaponLabel.setForeground(Color.darkGray);
+        playerPanel.add(weaponLabel);
+
+        weaponLabelName = new JLabel();
+        weaponLabelName.setFont(normalFont);
+        weaponLabelName.setForeground(Color.darkGray);
+        playerPanel.add(weaponLabelName);
+
+        playerSetUp();
+
+    }
+
+    public void playerSetUp(){
+        playerHP = 15;
+        weapon = "knife";
+        hpLabelNumber.setText(""+playerHP);
+        weaponLabelName.setText(weapon);
     }
 
     public class TitleScreenHandler implements ActionListener{
@@ -112,7 +151,13 @@ public class Game {
         button.setForeground(Color.BLUE);
         button.setFont(normalFont);
         button.setText(text);
+        button.setFocusPainted(false);
         return button;
+
+    }
+
+    public void routeSelection(){
+        position = "start";
 
     }
 }
