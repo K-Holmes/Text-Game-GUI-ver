@@ -72,11 +72,13 @@ public class Story {
             case "strongWeakened" -> strongWeakened();
             case "almostThereEnding" -> almostThereEnding();
             case "strongButNotEnding" -> strongButNotEnding();
+            case "createdSuperStrongFlower" -> createdSuperStrongFlower();
         }
     }
 
     public void clericApproach() {
         //done for those who restart to reset title
+        strongButWeak = false;
         p.title = "Mage";
         ui.playerTitleNameLabel.setText("" + p.title);
 
@@ -492,7 +494,7 @@ public class Story {
         ui.choice1.setText(">");
         ui.choice2.setText("");
 
-        g.nextPosition1 = "createdStrongFlower";
+        g.nextPosition1 = "createdSuperStrongFlower";
         g.nextPosition2 = "";
     }
     public void apprenticeEnding() {
@@ -547,5 +549,18 @@ public class Story {
 
         g.nextPosition1 = "restart";
         g.nextPosition2 = "leave";
+    }
+    public void createdSuperStrongFlower() {
+        ui.mainTextArea.setText("" +
+                "The cleric falls on his knees and weeps. You've not only saved the kingdom, " +
+                "but possibly the entire problem of world hunger!" +
+                "\nHe hands you a Green Mage Stone, officially making you a Potions Master!" +
+                "");
+
+        ui.choice1.setText(">");
+        ui.choice2.setText("");
+
+        g.nextPosition1 = "potionsMaster";
+        g.nextPosition2 = "";
     }
 }
