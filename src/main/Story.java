@@ -488,7 +488,7 @@ public class Story {
     public void superStrongPotion() {
         ui.mainTextArea.setText("" +
                 "You tell him the ingredients and his eyes sparkle as he smiles. You show great potential" +
-                "as an apprentice. He brings you to a row of dead flowers and feed the potion to them." +
+                " as an apprentice. He brings you to a row of dead flowers and feed the potion to them." +
                 " Within the blink of an eye they all stand up as healthy as the day they bloomed.");
 
         ui.choice1.setText(">");
@@ -499,7 +499,7 @@ public class Story {
     }
     public void apprenticeEnding() {
         ui.mainTextArea.setText("" +
-                "[POTIONS MASTER ENDING]" +
+                "[APPRENTICE ENDING]" +
                 "");
 
         p.title = "Apprentice";
